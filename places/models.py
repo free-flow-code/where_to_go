@@ -3,11 +3,6 @@ from django.db import models
 
 class Place(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
-    imgs = models.ImageField(
-        blank=True,
-        upload_to='images',
-        verbose_name='Фото'
-    )
     description_short = models.TextField(
         max_length=400,
         blank=True,
@@ -28,3 +23,16 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        related_name='images',
+        verbose_name='Фотографии'
+    )
+    image = models.ImageField(upload_to='media')
+
+    def __str__(self):
+        return f'{self.pk} {self.place.title}'
