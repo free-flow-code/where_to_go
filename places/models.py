@@ -32,7 +32,7 @@ class Image(models.Model):
         related_name='images',
         verbose_name='Фотографии'
     )
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='places')
 
     def __str__(self):
         return f'{self.pk} {self.place.title}'
