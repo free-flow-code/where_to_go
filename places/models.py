@@ -24,6 +24,9 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['pk']
+
 
 class Image(models.Model):
     place = models.ForeignKey(
@@ -33,7 +36,10 @@ class Image(models.Model):
         verbose_name='Фотографии'
     )
     image = models.ImageField(upload_to='places')
-    position = models.IntegerField('Позиция')
+    position = models.PositiveIntegerField('Позиция', default=0)
 
     def __str__(self):
         return f'{self.pk} {self.place.title}'
+
+    class Meta:
+        ordering = ['position']
