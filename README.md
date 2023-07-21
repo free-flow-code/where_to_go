@@ -1,6 +1,9 @@
 # Куда пойти — Москва глазами Артёма
 
 Проект сайта о самых интересных местах Москвы.
+Ознакомиться с сайтом можно [здесь](http://freeflowcode.pythonanywhere.com/).
+Для входа в админку перейдите [сюда](http://freeflowcode.pythonanywhere.com/admin/).
+Логин: `admin`, пароль: `admin`.
 
 ![](https://i.ibb.co/tLTvzv1/site.png)
 
