@@ -33,6 +33,7 @@ class Image(models.Model):
         verbose_name='Фотографии'
     )
     image = models.ImageField(upload_to='places')
+    position = models.IntegerField('Позиция')
 
     def __str__(self):
         return f'{self.pk} {self.place.title}'
