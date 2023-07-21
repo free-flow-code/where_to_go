@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from .models import Place
 
 
@@ -25,14 +26,14 @@ def show_index_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.pk,
-                "detailsUrl": "/static/places/roofs24.json"
+                "detailsUrl": reverse('place_json', args=[place.pk])
             }
         }
         context["geo_json"]["features"].append(place_features)
     return render(request, 'index.html', context=context)
 
 
-def place_view(place_id):
+def show_place_json(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     place_details = {
         "title": place.title,
