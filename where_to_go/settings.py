@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[os.path.join(BASE_DIR, 'static')])
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -129,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = env.str('STATIC_URL', default='/static/')
+STATIC_ROOT = env.str('STATIC_ROOT', default='')
 MEDIA_ROOT = env.path('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = env.str('MEDIA_URL', default='/media/')
 
