@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.conf import settings
 
 
 class Place(models.Model):
@@ -36,7 +37,7 @@ class Image(models.Model):
         related_name='images',
         verbose_name='Фотографии'
     )
-    image = models.ImageField(upload_to='places')
+    image = models.ImageField(upload_to=f'{settings.MEDIA_URL}'.replace('/', ''))
     position = models.PositiveIntegerField('Позиция', default=0)
 
     def __str__(self):
