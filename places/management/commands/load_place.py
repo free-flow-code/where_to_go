@@ -7,18 +7,6 @@ from django.core.files.base import ContentFile
 from places.models import Place, Image
 
 
-def add_place_to_db(place):
-    place_object, _ = Place.objects.get_or_create(
-        title=place['title'],
-        description_short=place['description_short'],
-        description_long=place['description_long'],
-        lat=place['coordinates']['lat'],
-        lon=place['coordinates']['lng'],
-    )
-
-    return place_object
-
-
 def add_images_to_db(place_object, images):
     for image_link in images:
         response = requests.get(image_link)
@@ -48,7 +36,13 @@ class Command(BaseCommand):
                 place_jsons.append(json.load(json_file))
 
         for place in place_jsons:
-            place_object = add_place_to_db(place)
+            place_object, _ = Place.objects.get_or_create(
+                title=place['title'],
+                description_short=place['description_short'],
+                description_long=place['description_long'],
+                lat=place['coordinates']['lat'],
+                lon=place['coordinates']['lng'],
+            )
             add_images_to_db(place_object, place['imgs'])
 
         self.stdout.write(self.style.SUCCESS('Successfully add all places.'))
