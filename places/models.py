@@ -6,7 +6,6 @@ from django.conf import settings
 class Place(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     description_short = models.TextField(
-        max_length=400,
         blank=True,
         verbose_name='Короткое описание'
     )
@@ -15,11 +14,9 @@ class Place(models.Model):
         verbose_name='Полное описание'
     )
     lat = models.FloatField(
-        blank=False,
         verbose_name='Широта'
     )
     lon = models.FloatField(
-        blank=False,
         verbose_name='Долгота'
     )
 
@@ -38,7 +35,7 @@ class Image(models.Model):
         verbose_name='Фотографии'
     )
     image = models.ImageField(upload_to=f'{settings.MEDIA_URL}'.replace('/', ''))
-    position = models.PositiveIntegerField('Позиция', default=0)
+    position = models.PositiveIntegerField('Позиция', default=0, blank=True)
 
     def __str__(self):
         return f'{self.pk} {self.place.title}'
