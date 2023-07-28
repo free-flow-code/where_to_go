@@ -34,7 +34,7 @@ class Image(models.Model):
         related_name='images',
         verbose_name='Фотографии'
     )
-    image = models.ImageField(upload_to=f'{settings.MEDIA_URL}'.replace('/', ''))
+    image = models.ImageField(upload_to=f'{settings.MEDIA_ROOT}')
     position = models.PositiveIntegerField('Позиция', default=0, blank=True)
 
     def __str__(self):
