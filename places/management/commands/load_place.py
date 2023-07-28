@@ -38,10 +38,12 @@ class Command(BaseCommand):
         for place in place_jsons:
             place_object, _ = Place.objects.get_or_create(
                 title=place['title'],
-                description_short=place['description_short'],
-                description_long=place['description_long'],
-                lat=place['coordinates']['lat'],
-                lon=place['coordinates']['lng'],
+                defaults={
+                    'description_short': place['description_short'],
+                    'description_long': place['description_long'],
+                    'lat': place['coordinates']['lat'],
+                    'lon': place['coordinates']['lng']
+                }
             )
             add_images_to_db(place_object, place['imgs'])
 
