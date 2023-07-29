@@ -7,12 +7,6 @@ from django.core.files.base import ContentFile
 from places.models import Place, Image
 
 
-def get_image(image_link):
-    response = requests.get(image_link)
-    response.raise_for_status()
-    return ContentFile(response.content)
-
-
 class Command(BaseCommand):
     help = 'Upload places to DB from JSON'
 
@@ -43,7 +37,9 @@ class Command(BaseCommand):
             )
 
             for image_link in place['imgs']:
-                content = get_image(image_link)
+                response = requests.get(image_link)
+                response.raise_for_status()
+                content = ContentFile(response.content)
                 image_name = str(urlsplit(image_link).path.split('/')[-1])
                 image_object = Image.objects.create(place=place_object)
                 image_object.image.save(image_name, content=content, save=True)
